@@ -14,10 +14,7 @@
   ],
   "main": "./lib/rp.js",
   "scripts": {
-    "test": "./node_modules/.bin/gulp ci",
-    "test-publish": "./node_modules/.bin/gulp ci-no-cov",
-    "publish-please": "publish-please",
-    "prepublish": "publish-please guard"
+    "test": "gulp ci"
   },
   "repository": {
     "type": "git",
@@ -30,7 +27,7 @@
   },
   "homepage": "https://github.com/request/request-promise-native#readme",
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=18.x"
   },
   "dependencies": {
     "request-promise-core": "1.1.4",
