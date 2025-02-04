@@ -1,0 +1,30 @@
+name: Test with mocha
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        # https://nodejs.org/en/about/previous-releases#release-schedule
+        # https://github.com/actions/setup-node?tab=readme-ov-file#supported-version-syntax
+        node-version: [18.x, 20.x, 22.x, 23.x]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build and test
+      run: |
+        npm ci
+        npm t
