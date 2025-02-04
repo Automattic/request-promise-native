@@ -48,7 +48,7 @@
     "gulp-mocha": "^10.0.1",
     "lodash": "~4.17.21",
     "mocha": "^11.1.0",
-    "publish-please": "~2.1.4",
+    "publish-please": "~5.5.2",
     "request": "^2.34.0",
     "rimraf": "~6.0.1",
     "run-sequence": "~2.2.1"
