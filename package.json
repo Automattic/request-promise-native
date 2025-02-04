@@ -48,7 +48,7 @@
     "gulp-coveralls": "~0.1.4",
     "gulp-eslint": "~2.1.0",
     "gulp-istanbul": "~1.0.0",
-    "gulp-mocha": "~2.2.0",
+    "gulp-mocha": "~10.0.1",
     "lodash": "~4.13.1",
     "publish-please": "~2.1.4",
     "request": "^2.34.0",
