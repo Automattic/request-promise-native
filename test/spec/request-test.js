@@ -5,7 +5,8 @@ var childProcess = require('child_process'),
     path = require('path'),
     rp = require('../../'),
     tough = require('tough-cookie'),
-    startServer = require('../fixtures/server.js');
+    startServer = require('../fixtures/server.js'),
+    expect = require('chai').expect;
 
 
 describe('Request-Promise-Native', function () {
