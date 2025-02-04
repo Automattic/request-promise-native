@@ -30,12 +30,10 @@
     "node": ">=18.x"
   },
   "dependencies": {
+    "request": "^2.88.2",
     "request-promise-core": "1.1.4",
     "stealthy-require": "^1.1.1",
     "tough-cookie": "^5.1.0"
-  },
-  "peerDependencies": {
-    "request": "^2.88.2"
   },
   "devDependencies": {
     "body-parser": "~1.20.3",
@@ -43,7 +41,6 @@
     "chalk": "~5.4.1",
     "lodash": "~4.17.21",
     "mocha": "^11.1.0",
-    "request": "^2.88.2",
     "rimraf": "~6.0.1",
     "run-sequence": "~2.2.1"
   }
