@@ -37,7 +37,8 @@
   },
   "overrides": {
     "request": {
-      "tough-cookie": "^5.1.0"
+      "tough-cookie": "^5.1.0",
+      "uuid": "^7.0.0"
     }
   },
   "devDependencies": {
