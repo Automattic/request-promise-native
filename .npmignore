@@ -1,4 +1,5 @@
 /.idea/
+/.github/
 /coverage/
 /test/
 
@@ -6,7 +7,6 @@
 /.eslintrc.json
 /.gitignore
 /.publishrc
-/.travis.yml
 /gulpfile.js
 
 .DS_Store

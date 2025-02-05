@@ -1,18 +1,11 @@
-<a href="http://promisesaplus.com/">
-    <img src="https://promises-aplus.github.io/promises-spec/assets/logo-small.png" align="right" alt="Promises/A+ logo" />
-</a>
+Request-Promise-Native
+======================
 
-# Request-Promise-Native
-
-[![Gitter](https://img.shields.io/badge/gitter-join_chat-blue.svg?style=flat-square&maxAge=2592000)](https://gitter.im/request/request-promise?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://img.shields.io/travis/request/request-promise-native/master.svg?style=flat-square&maxAge=2592000)](https://travis-ci.org/request/request-promise-native)
-[![Coverage Status](https://img.shields.io/coveralls/request/request-promise-native.svg?style=flat-square&maxAge=2592000)](https://coveralls.io/r/request/request-promise-native)
-[![Dependency Status](https://img.shields.io/david/request/request-promise-native.svg?style=flat-square&maxAge=2592000)](https://david-dm.org/request/request-promise-native)
-[![Known Vulnerabilities](https://snyk.io/test/npm/request-promise-native/badge.svg?style=flat-square&maxAge=2592000)](https://snyk.io/test/npm/request-promise-native)
+[![Test with mocha](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml/badge.svg)](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml)
 
 # Deprecated!
 
-As of Feb 11th 2020, [`request`](https://github.com/request/request) is fully deprecated. No new changes are expected to land. In fact, none have landed for some time. This package is also deprecated because it depends on `request`.
+As of Feb 11th 2020, [`request`](https://github.com/request/request) is fully deprecated. No new changes are expected to land. In fact, none have landed for some time. This package is also deprecated because it depends on `request`. We're only keeping the library's dependencies up to date.
 
 Fyi, here is the [reasoning of `request`'s deprecation](https://github.com/request/request/issues/3142) and a [list of alternative libraries](https://github.com/request/request/issues/3143).
 
@@ -29,11 +22,9 @@ Please refer to the [`request-promise` documentation](https://www.npmjs.com/pack
 This module is installed via npm:
 
 ```
-npm install --save request
-npm install --save request-promise-native
+npm i --save "request-promise-native@npm:@automattic/request-promise-native@latest"
 ```
 
-`request` is defined as a peer-dependency and thus has to be installed separately.
 
 ## Migration from `request-promise` to `request-promise-native`
 
@@ -57,6 +48,8 @@ If you want to debug a test you should use `gulp test-without-coverage` to run a
 
 ## Change History
 
+- v1.1.0 (2025-02-95)
+    - Dependencies cleaned up and updated.
 - v1.0.9 (2020-07-21)
     - Security fix: bumped `request-promise-core` which bumps `lodash` to `^4.17.19` following [this advisory](https://www.npmjs.com/advisories/1523).
 - v1.0.8 (2019-11-03)
