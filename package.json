@@ -15,6 +15,7 @@
   "main": "./lib/rp.js",
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "test": "mocha test/spec",
     "check-dependencies": "npx depcheck@1.4.7"
   },
