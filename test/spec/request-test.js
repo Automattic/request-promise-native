@@ -1,5 +1,3 @@
-'use strict';
-
 var childProcess = require('child_process'),
     errors = require('../../errors'),
     path = require('path'),

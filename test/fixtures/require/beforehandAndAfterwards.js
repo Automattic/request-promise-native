@@ -1,5 +1,3 @@
-'use strict';
-
 var request1 = require('request');
 var rp = require('../../../');
 var request2 = require('request');
