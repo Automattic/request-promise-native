@@ -1,5 +1,3 @@
-'use strict';
-
 var bodyParser = require('body-parser');
 var http = require('http');
 var url = require('url');
