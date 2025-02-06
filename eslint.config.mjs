@@ -1,11 +1,13 @@
 import globals from "globals";
 
+// https://eslint.org/docs/latest/use/configure/configuration-files#configuration-objects
 export default [{
     plugins: {},
 
     languageOptions: {
         globals: {
             ...globals.node,
+            ...globals.mocha, // for tests
             Promise: false,
         },
 
