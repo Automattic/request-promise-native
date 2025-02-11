@@ -1,5 +1,3 @@
-'use strict';
-
 var Bluebird = require('bluebird'),
     configure = require('../../configure/request2.js'),
     errors = require('../../errors'),
@@ -95,7 +93,7 @@ describe('Promise-Core for Request@2', function () {
 
         it('should forward the constructorMixin', function () {
 
-            var mixinCalled = false; // eslint-disable-line no-unused-vars
+            var mixinCalled = false;
 
             var request = stealthyRequire(require.cache, function () {
                 return require('request');

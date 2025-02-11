@@ -1,6 +1,3 @@
-'use strict';
-
-
 function RequestError(cause, options, response) {
 
     this.name = 'RequestError';

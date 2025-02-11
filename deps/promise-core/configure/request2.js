@@ -1,5 +1,3 @@
-'use strict';
-
 var core = require('../'),
     isArray = require('lodash/isArray'),
     isFunction = require('lodash/isFunction'),

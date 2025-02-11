@@ -1,5 +1,3 @@
-'use strict';
-
 var errors = require('./errors.js'),
     isFunction = require('lodash/isFunction'),
     isObjectLike = require('lodash/isObjectLike'),
@@ -90,9 +88,9 @@ module.exports = function (options) {
 
             if (isFunction(self._rp_options.transform) && self._rp_options.transform2xxOnly === false) {
 
-                (new PromiseImpl(function (resolve) {
+                new PromiseImpl(function (resolve) {
                     resolve(self._rp_options.transform(body, response, self._rp_options.resolveWithFullResponse)); // transform may return a Promise
-                }))
+                })
                     .then(function (transformedResponse) {
                         self._rp_reject(new errors.StatusCodeError(response.statusCode, body, self._rp_options, transformedResponse));
                     })
@@ -108,9 +106,9 @@ module.exports = function (options) {
 
             if (isFunction(self._rp_options.transform) && (is2xx || self._rp_options.transform2xxOnly === false)) {
 
-                (new PromiseImpl(function (resolve) {
+                new PromiseImpl(function (resolve) {
                     resolve(self._rp_options.transform(body, response, self._rp_options.resolveWithFullResponse)); // transform may return a Promise
-                }))
+                })
                     .then(function (transformedResponse) {
                         self._rp_resolve(transformedResponse);
                     })

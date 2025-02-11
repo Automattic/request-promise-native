@@ -1,5 +1,3 @@
-'use strict';
-
 var _ = require('lodash'),
     Bluebird = require('bluebird'),
     errors = require('../../errors'),
