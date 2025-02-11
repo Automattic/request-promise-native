@@ -29,3 +29,9 @@ jobs:
         npm ci
         npm run lint
         npm t
+
+    - name: Test the dependency
+      run: |
+        cd deps/promise-core
+        npm ci
+        npm t
