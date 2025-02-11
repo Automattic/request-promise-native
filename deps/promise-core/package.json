@@ -42,7 +42,6 @@
     "chalk": "~1.1.3",
     "mocha": "^11.1.0",
     "node-version": "~1.0.0",
-    "publish-please": "~2.4.1",
     "rimraf": "~2.5.3",
     "run-sequence": "~1.2.2",
     "stealthy-require": "~1.0.0"
