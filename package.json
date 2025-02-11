@@ -1,6 +1,6 @@
 {
   "name": "@automattic/request-promise-native",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "The simplified HTTP request client 'request' with Promise support. Powered by native ES6 promises.",
   "keywords": [
     "xhr",
