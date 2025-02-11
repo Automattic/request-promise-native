@@ -14,10 +14,7 @@
   ],
   "main": "./lib/plumbing.js",
   "scripts": {
-    "test": "./node_modules/.bin/gulp ci",
-    "test-publish": "./node_modules/.bin/gulp ci-no-cov",
-    "publish-please": "publish-please",
-    "prepublish": "publish-please guard"
+    "test": "gulp ci"
   },
   "repository": {
     "type": "git",
@@ -30,13 +27,11 @@
   },
   "homepage": "https://github.com/request/promise-core#readme",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=18"
   },
   "dependencies": {
-    "lodash": "^4.17.19"
-  },
-  "peerDependencies": {
-    "request": "^2.34"
+    "lodash": "^4.17.19",
+    "request": "npm:@cypress/request@^3.0.7"
   },
   "devDependencies": {
     "@request/api": "^0.6.0",
@@ -52,7 +47,6 @@
     "gulp-mocha": "~2.2.0",
     "node-version": "~1.0.0",
     "publish-please": "~2.4.1",
-    "request": "^2.34.0",
     "rimraf": "~2.5.3",
     "run-sequence": "~1.2.2",
     "stealthy-require": "~1.0.0"
