@@ -33,6 +33,7 @@
     "node": ">=18.x"
   },
   "dependencies": {
+    "request": "npm:@cypress/request@^3.0.7",
     "request-promise-core": "1.1.4",
     "stealthy-require": "^1.1.1"
   },
