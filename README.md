@@ -3,11 +3,9 @@ Request-Promise-Native
 
 [![Test with mocha](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml/badge.svg)](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml)
 
-# Deprecated!
+# Important note
 
-As of Feb 11th 2020, [`request`](https://github.com/request/request) is fully deprecated. No new changes are expected to land. In fact, none have landed for some time. This package is also deprecated because it depends on `request`. We're only keeping the library's dependencies up to date.
-
-Fyi, here is the [reasoning of `request`'s deprecation](https://github.com/request/request/issues/3142) and a [list of alternative libraries](https://github.com/request/request/issues/3143).
+As of Feb 11th 2020, [`request`](https://github.com/request/request) is fully deprecated. Hence, we're using [the forked version of it - `@cypress/request`](https://github.com/cypress-io/request).
 
 ---
 
