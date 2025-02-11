@@ -2,6 +2,8 @@
 /.github/
 /coverage/
 /test/
+/deps/promise-core/node_modules
+/deps/promise-core/test/
 
 /.editorconfig
 /.eslintrc.json
