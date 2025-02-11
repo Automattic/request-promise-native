@@ -34,13 +34,8 @@
   },
   "dependencies": {
     "request": "npm:@cypress/request@^3.0.7",
-    "request-promise-core": "1.1.4",
+    "request-promise-core": "file:deps/promise-core",
     "stealthy-require": "^1.1.1"
-  },
-  "overrides": {
-    "request-promise-core": {
-      "request": "npm:@cypress/request@^3.0.7"
-    }
   },
   "devDependencies": {
     "body-parser": "~1.20.3",
