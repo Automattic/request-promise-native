@@ -1,0 +1,45 @@
+{
+  "name": "request-promise-core",
+  "version": "1.1.4",
+  "description": "Core Promise support implementation for the simplified HTTP request client 'request'.",
+  "keywords": [
+    "xhr",
+    "http",
+    "https",
+    "promise",
+    "request",
+    "then",
+    "thenable",
+    "core"
+  ],
+  "main": "./lib/plumbing.js",
+  "scripts": {
+    "test": "mocha -R spec test/spec",
+    "check-dependencies": "npx depcheck@1.4.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/request/promise-core.git"
+  },
+  "author": "Nicolai Kamenzky (https://github.com/analog-nico)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/request/promise-core/issues"
+  },
+  "homepage": "https://github.com/request/promise-core#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "lodash": "^4.17.19",
+    "request": "npm:@cypress/request@^3.0.7"
+  },
+  "devDependencies": {
+    "bluebird": "~3.4.1",
+    "body-parser": "^1.20.3",
+    "chai": "^4.5.0",
+    "mocha": "^11.1.0",
+    "node-version": "^3.0.0",
+    "stealthy-require": "~1.0.0"
+  }
+}
