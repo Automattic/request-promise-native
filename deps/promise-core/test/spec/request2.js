@@ -369,25 +369,22 @@ describe('Promise-Core for Request@2', function () {
 
         });
 
-        if (process.env.V_REQUEST !== '2.34.0') { // Was never supported in this version so fixing it wouldn't make sense.
+        it('.defaults(...) feature using it multiple times', function (done) {
 
-            it('.defaults(...) feature using it multiple times', function (done) {
+            var rpSimpleOff = request.defaults({ simple: false });
+            var rpSimpleOffWithFullResp = rpSimpleOff.defaults({ resolveWithFullResponse: true });
 
-                var rpSimpleOff = request.defaults({ simple: false });
-                var rpSimpleOffWithFullResp = rpSimpleOff.defaults({ resolveWithFullResponse: true });
+            rpSimpleOffWithFullResp('http://localhost:4000/404')
+                .then(function (response) {
+                    expect(response.body).to.eql('GET /404');
+                    done();
+                })
+                .catch(function (err) {
+                    done(err);
+                });
 
-                rpSimpleOffWithFullResp('http://localhost:4000/404')
-                    .then(function (response) {
-                        expect(response.body).to.eql('GET /404');
-                        done();
-                    })
-                    .catch(function (err) {
-                        done(err);
-                    });
+        });
 
-            });
-
-        }
 
         it('event emitter', function (done) {
 
