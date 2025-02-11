@@ -21,14 +21,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/request/request-promise-native.git"
+    "url": "git+https://github.com/Automattic/request-promise-native.git"
   },
   "author": "Nicolai Kamenzky (https://github.com/analog-nico)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/request/request-promise-native/issues"
+    "url": "https://github.com/Automattic/request-promise-native/issues"
   },
-  "homepage": "https://github.com/request/request-promise-native#readme",
+  "homepage": "https://github.com/Automattic/request-promise-native#readme",
   "engines": {
     "node": ">=18.x"
   },
