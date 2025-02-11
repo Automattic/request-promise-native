@@ -39,9 +39,9 @@
     "@request/client": "^0.1.0",
     "bluebird": "~3.4.1",
     "body-parser": "^1.20.3",
-    "chai": "~3.5.0",
+    "chai": "^5.1.2",
     "mocha": "^11.1.0",
-    "node-version": "~1.0.0",
+    "node-version": "^3.0.0",
     "stealthy-require": "~1.0.0"
   }
 }
