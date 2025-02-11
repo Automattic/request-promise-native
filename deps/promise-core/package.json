@@ -40,6 +40,6 @@
     "chai": "^4.5.0",
     "mocha": "^11.1.0",
     "node-version": "^3.0.0",
-    "stealthy-require": "~1.0.0"
+    "stealthy-require": "~1.1.1"
   }
 }
