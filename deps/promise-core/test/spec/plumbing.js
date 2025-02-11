@@ -3,7 +3,8 @@
 var _ = require('lodash'),
     Bluebird = require('bluebird'),
     errors = require('../../errors'),
-    plumbing = require('../../');
+    plumbing = require('../../'),
+    expect = require('chai').expect;
 
 
 describe('Promise-Core\'s Plumbing', function () {

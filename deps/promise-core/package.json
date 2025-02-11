@@ -14,7 +14,7 @@
   ],
   "main": "./lib/plumbing.js",
   "scripts": {
-    "test": "gulp ci"
+    "test": "mocha -R spec test/spec"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
     "body-parser": "~1.15.2",
     "chai": "~3.5.0",
     "chalk": "~1.1.3",
+    "mocha": "^11.1.0",
     "node-version": "~1.0.0",
     "publish-please": "~2.4.1",
     "rimraf": "~2.5.3",

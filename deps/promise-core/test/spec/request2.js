@@ -4,7 +4,8 @@ var Bluebird = require('bluebird'),
     configure = require('../../configure/request2.js'),
     errors = require('../../errors'),
     stealthyRequire = require('stealthy-require'),
-    startServer = require('../fixtures/server.js');
+    startServer = require('../fixtures/server.js'),
+    expect = require('chai').expect;
 
 
 describe('Promise-Core for Request@2', function () {

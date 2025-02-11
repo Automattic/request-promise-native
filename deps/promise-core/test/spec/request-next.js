@@ -4,7 +4,8 @@ var Bluebird = require('bluebird'),
     configure = require('../../configure/request-next.js'),
     errors = require('../../errors'),
     nodeVersion = require('node-version'),
-    startServer = require('../fixtures/server.js');
+    startServer = require('../fixtures/server.js'),
+    expect = require('chai').expect;
 
 
 describe('Promise-Core for Request@next', function () {
