@@ -29,6 +29,7 @@ jobs:
         npm ci
         npm run check-dependencies
         npm run lint
+        npm run check-dts
         npm t
 
     - name: Test the dependency

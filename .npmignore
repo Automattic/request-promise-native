@@ -5,11 +5,11 @@
 /deps/promise-core/node_modules
 /deps/promise-core/test/
 
+/.depcheckrc
 /.editorconfig
-/.eslintrc.json
+/eslint.config.mjs
 /.gitignore
-/.publishrc
-/gulpfile.js
+/tsconfig.json
 
 .DS_Store
 npm-debug.log
