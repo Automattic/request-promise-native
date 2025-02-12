@@ -7,7 +7,7 @@
 
 /.depcheckrc
 /.editorconfig
-/.eslintrc.json
+/eslint.config.mjs
 /.gitignore
 /tsconfig.json
 
