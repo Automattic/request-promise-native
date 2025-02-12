@@ -5,6 +5,7 @@
 /deps/promise-core/node_modules
 /deps/promise-core/test/
 
+/.depcheckrc
 /.editorconfig
 /.eslintrc.json
 /.gitignore
