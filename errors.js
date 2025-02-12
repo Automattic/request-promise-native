@@ -1,1 +1,1 @@
-module.exports = require('request-promise-core/errors');
+module.exports = require('./deps/promise-core/errors.js');
