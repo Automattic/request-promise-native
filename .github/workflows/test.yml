@@ -27,6 +27,7 @@ jobs:
     - name: Lint and test
       run: |
         npm ci
+        npm run check-dependencies
         npm run lint
         npm t
 
@@ -34,4 +35,5 @@ jobs:
       run: |
         cd deps/promise-core
         npm ci
+        npm run check-dependencies
         npm t
