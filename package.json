@@ -13,11 +13,13 @@
     "native"
   ],
   "main": "./lib/rp.js",
+  "types": "./lib/request.d.ts",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "test": "mocha test/spec",
-    "check-dependencies": "npx depcheck@1.4.7"
+    "check-dependencies": "npx depcheck@1.4.7",
+    "check-dts": "npx check-dts lib/*.d.ts"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
     "stealthy-require": "^1.1.1"
   },
   "devDependencies": {
+    "@types/node": "^22.13.1",
     "body-parser": "~1.20.3",
     "chai": "^4.5.0",
     "eslint": "^9.19.0",
