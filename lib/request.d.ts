@@ -1,12 +1,12 @@
 // See https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/request/index.d.ts
 
 import caseless from "caseless";
-import stream from "node:stream";
+import { Stream, Readable } from "node:stream";
 import http from "node:http";
 import https from "node:https";
 import FormData from "form-data";
 import net from "node:net";
-import tough from "tough-cookie";
+import ToughCookie from "tough-cookie";
 import { Url } from "node:url";
 
 declare namespace request {
@@ -208,7 +208,7 @@ declare namespace request {
         body: any;
     }
 
-    interface Request extends caseless.Httpified, stream.Stream {
+    interface Request extends caseless.Httpified, Stream {
         readable: boolean;
         writable: boolean;
         explicitMethod?: true | undefined;
@@ -232,7 +232,7 @@ declare namespace request {
         on(event: "data", listener: (data: Buffer | string) => void): this;
         on(event: "error", listener: (e: Error) => void): this;
         on(event: "complete", listener: (resp: Response, body?: string | Buffer) => void): this;
-        on(event: "pipe", listener: (src: stream.Readable) => void): this;
+        on(event: "pipe", listener: (src: Readable) => void): this;
         on(event: "socket", listener: (src: net.Socket) => void): this;
 
         write(buffer: Buffer | string, cb?: (err?: Error) => void): boolean;
@@ -274,7 +274,7 @@ declare namespace request {
         headers: Headers;
         method: string;
         pool: PoolOptions;
-        dests: stream.Readable[];
+        dests: Readable[];
         callback?: RequestCallback | undefined;
         uri: Url & { href: string; pathname: string };
         proxy: null | string | Url;
@@ -282,9 +282,9 @@ declare namespace request {
         setHost: boolean;
         path: string;
         agent: false | http.Agent | https.Agent;
-        body: Buffer | Buffer[] | string | string[] | stream.Readable;
+        body: Buffer | Buffer[] | string | string[] | Readable;
         timing?: boolean | undefined;
-        src?: stream.Readable | undefined;
+        src?: Readable | undefined;
 
         // set in `Request.prototype.start`
         href: string;
@@ -380,10 +380,10 @@ declare namespace request {
         request: RequestAsJSON;
     }
 
-    type Cookie = tough.Cookie;
+    type Cookie = ToughCookie.Cookie;
 
     interface CookieJar {
-        setCookie(cookieOrStr: Cookie | string, uri: string | Url, options?: tough.CookieJar.SetCookieOptions): void;
+        setCookie(cookieOrStr: Cookie | string, uri: string | Url, options?: ToughCookie.SetCookieOptions): void;
         getCookieString(uri: string | Url): string;
         getCookies(uri: string | Url): Cookie[];
     }
