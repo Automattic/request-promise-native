@@ -31,10 +31,3 @@ jobs:
         npm run lint
         npm run check-dts
         npm t
-
-    - name: Test the dependency
-      run: |
-        cd deps/promise-core
-        npm ci
-        npm run check-dependencies
-        npm t

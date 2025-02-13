@@ -17,7 +17,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "mocha test/spec",
+    "test": "mocha test/spec && mocha deps/promise-core/test/spec",
     "check-dependencies": "npx depcheck@1.4.7",
     "check-dts": "npx check-dts lib/*.d.ts"
   },
