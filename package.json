@@ -17,7 +17,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "test": "mocha test/spec",
+    "test": "mocha test/spec && mocha deps/promise-core/test/spec",
     "check-dependencies": "npx depcheck@1.4.7",
     "check-dts": "npx check-dts lib/*.d.ts"
   },
@@ -35,13 +35,14 @@
     "node": ">=18.x"
   },
   "dependencies": {
+    "lodash": "^4.17.19",
     "request": "npm:@cypress/request@^3.0.7",
-    "request-promise-core": "file:deps/promise-core",
     "stealthy-require": "^1.1.1"
   },
   "devDependencies": {
     "@types/caseless": "^0.12.5",
     "@types/node": "^22.13.1",
+    "bluebird": "^3.7.2",
     "body-parser": "~1.20.3",
     "chai": "^4.5.0",
     "eslint": "^9.19.0",

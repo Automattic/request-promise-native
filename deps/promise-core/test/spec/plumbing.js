@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     Bluebird = require('bluebird'),
     errors = require('../../errors'),
-    plumbing = require('../../'),
+    plumbing = require('../../lib/plumbing'),
     expect = require('chai').expect;
 
 
