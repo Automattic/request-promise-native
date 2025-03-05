@@ -5,10 +5,3 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 15
-  
-  - package-ecosystem: "npm"
-    directory: "/deps/promise-core/"
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 15
- 
