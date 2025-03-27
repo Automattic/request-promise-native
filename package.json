@@ -43,7 +43,7 @@
     "@types/caseless": "^0.12.5",
     "@types/node": "^22.13.1",
     "bluebird": "^3.7.2",
-    "body-parser": "~1.20.3",
+    "body-parser": "~2.2.0",
     "chai": "^4.5.0",
     "eslint": "^9.19.0",
     "globals": "^16.0.0",
