@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/Automattic/request-promise-native#readme",
   "engines": {
-    "node": ">=18.x"
+    "node": ">=20.x"
   },
   "dependencies": {
     "lodash": "^4.17.19",
