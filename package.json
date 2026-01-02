@@ -46,7 +46,7 @@
     "body-parser": "~2.2.0",
     "chai": "^6.0.1",
     "eslint": "^9.19.0",
-    "globals": "^16.0.0",
+    "globals": "^17.0.0",
     "mocha": "^11.1.0",
     "tough-cookie": "^6.0.0"
   }
