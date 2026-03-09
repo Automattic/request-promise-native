@@ -1,14 +1,17 @@
 const Bluebird = require('bluebird'),
     configure = require('../../configure/request2.js'),
-    errors = require('../../errors'),
     stealthyRequire = require('stealthy-require'),
     startServer = require('../fixtures/server.js');
 
-const { afterAll, beforeAll, describe, expect, it } = require('@jest/globals');
+const { afterAll, afterEach, beforeAll, describe, expect, it } = require('@jest/globals');
 
 describe('Promise-Core for Request@2', function () {
 
     describe('during configuration', function () {
+
+        afterEach(function () {
+            jest.resetModules();
+        });
 
         it('should verify the options', function () {
 
@@ -95,11 +98,9 @@ describe('Promise-Core for Request@2', function () {
 
             var mixinCalled = false;
 
-            // var request = stealthyRequire(require.cache, function () {
-            //     return require('request');
-            // });
-
-            const request = require('request');
+            var request = stealthyRequire(require.cache, function () {
+                return require('request');
+            });
 
             configure({
                 request: request,
@@ -131,15 +132,20 @@ describe('Promise-Core for Request@2', function () {
      */
     describe('doing requests', function () {
 
-        var request = null, stopServer = null;
+        var request = null, stopServer = null, freshErrors = null;
 
         beforeAll(function (done) {
+
+            jest.resetModules();
 
             request = stealthyRequire(require.cache, function () {
                 return require('request');
             });
 
-            configure({
+            var configureFn = require('../../configure/request2.js');
+            freshErrors = require('../../errors');
+
+            configureFn({
                 request: request,
                 PromiseImpl: Bluebird,
                 expose: [
@@ -159,7 +165,7 @@ describe('Promise-Core for Request@2', function () {
 
         afterAll(function (done) {
 
-            stopServer && stopServer(done);
+            stopServer(done);
 
         });
 
@@ -260,7 +266,7 @@ describe('Promise-Core for Request@2', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.RequestError).toEqual(true);
+                    expect(err instanceof freshErrors.RequestError).toEqual(true);
                     done();
                 });
 
@@ -273,7 +279,7 @@ describe('Promise-Core for Request@2', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).toEqual(true);
+                    expect(err instanceof freshErrors.StatusCodeError).toEqual(true);
                     done();
                 });
 
@@ -305,11 +311,15 @@ describe('Promise-Core for Request@2', function () {
 
         beforeAll(function (done) {
 
+            jest.resetModules();
+
             request = stealthyRequire(require.cache, function () {
                 return require('request');
             });
 
-            configure({
+            var configureFn = require('../../configure/request2.js');
+
+            configureFn({
                 request: request,
                 PromiseImpl: Bluebird,
                 expose: [
@@ -328,7 +338,7 @@ describe('Promise-Core for Request@2', function () {
         });
 
         afterAll(function (done) {
-            ( stopServer && stopServer(done) ) || done();
+            stopServer(done);
         });
 
         it('method shortcuts', function (done) {

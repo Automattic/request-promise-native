@@ -12,7 +12,7 @@ describe('Request-Promise-Native', function () {
     var stopServer = null;
 
     beforeAll(function (done) {
-        startServer(4000, function (stop) {
+        startServer(4001, function (stop) {
             stopServer = stop;
             done();
         });
@@ -26,7 +26,7 @@ describe('Request-Promise-Native', function () {
 
         it('.then(...)', function (done) {
 
-            rp('http://localhost:4000/200')
+            rp('http://localhost:4001/200')
                 .then(function (body) {
                     expect(body).toEqual('GET /200');
                     done();
@@ -39,7 +39,7 @@ describe('Request-Promise-Native', function () {
 
         it('.catch(...) and the error types', function (done) {
 
-            rp('http://localhost:4000/404')
+            rp('http://localhost:4001/404')
                 .catch(function (err) {
                     expect(err).toBeInstanceOf(errors.StatusCodeError);
                     return 'catch called';
@@ -56,7 +56,7 @@ describe('Request-Promise-Native', function () {
 
         it('.promise() returning a native ES6 promise', function () {
 
-            var p = rp('http://localhost:4000/200').promise();
+            var p = rp('http://localhost:4001/200').promise();
 
             expect(p).toBeInstanceOf(Promise);
         });
