@@ -79,8 +79,10 @@ describe('Promise-Core for Request@2', function () {
                     PromiseImpl: Bluebird
                 });
             }).not.toThrow();
+        });
 
-            request = stealthyRequire(require.cache, function () {
+        it('validates custom promises implementation', function () {
+            const request = stealthyRequire(require.cache, function () {
                 return require('request');
             });
 
@@ -90,7 +92,7 @@ describe('Promise-Core for Request@2', function () {
                     expose: ['promise'],
                     PromiseImpl: Bluebird
                 });
-            }).toThrow('Unable to expose method "promise"');
+            }).toThrow('Please expose "then"');
 
         });
 
