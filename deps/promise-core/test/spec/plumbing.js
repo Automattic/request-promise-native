@@ -1,8 +1,9 @@
 var _ = require('lodash'),
     Bluebird = require('bluebird'),
     errors = require('../../errors'),
-    plumbing = require('../../lib/plumbing'),
-    expect = require('chai').expect;
+    plumbing = require('../../lib/plumbing');
+
+const { beforeAll, describe, expect, it } = require('@jest/globals');
 
 
 describe('Promise-Core\'s Plumbing', function () {
@@ -11,35 +12,35 @@ describe('Promise-Core\'s Plumbing', function () {
 
         expect(function () {
             plumbing();
-        }).to.throw('Please verify options');
+        }).toThrow('Please verify options');
 
         expect(function () {
             plumbing('not an object');
-        }).to.throw('Please verify options');
+        }).toThrow('Please verify options');
 
         expect(function () {
             plumbing({});
-        }).to.throw('Please verify options.PromiseImpl');
+        }).toThrow('Please verify options.PromiseImpl');
 
         expect(function () {
             plumbing({
                 PromiseImpl: 'not a function'
             });
-        }).to.throw('Please verify options.PromiseImpl');
+        }).toThrow('Please verify options.PromiseImpl');
 
         expect(function () {
             plumbing({
                 PromiseImpl: function () {},
                 constructorMixin: false
             });
-        }).to.throw('Please verify options.PromiseImpl');
+        }).toThrow('Please verify options.PromiseImpl');
 
         expect(function () {
             plumbing({
                 PromiseImpl: function () {},
                 constructorMixin: function () {}
             });
-        }).not.to.throw();
+        }).not.toThrow();
 
     });
 
@@ -47,7 +48,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
         var pl = null;
 
-        before(function () {
+        beforeAll(function () {
 
             pl = plumbing({
                 PromiseImpl: Bluebird
@@ -61,8 +62,8 @@ describe('Promise-Core\'s Plumbing', function () {
 
             pl.init.call(context, {});
 
-            expect(_.isFunction(context._rp_promise.then)).to.eql(true);
-            expect(_.isFunction(context._rp_resolve)).to.eql(true);
+            expect(_.isFunction(context._rp_promise.then)).toEqual(true);
+            expect(_.isFunction(context._rp_resolve)).toEqual(true);
 
             context._rp_resolve();
 
@@ -81,8 +82,8 @@ describe('Promise-Core\'s Plumbing', function () {
             var context = {};
             pl.init.call(context, {});
 
-            expect(_.isFunction(context._rp_promise.then)).to.eql(true);
-            expect(_.isFunction(context._rp_reject)).to.eql(true);
+            expect(_.isFunction(context._rp_promise.then)).toEqual(true);
+            expect(_.isFunction(context._rp_reject)).toEqual(true);
 
             context._rp_reject(new Error('Rejected by test case'));
 
@@ -91,7 +92,7 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err.message).to.eql('Rejected by test case');
+                    expect(err.message).toEqual('Rejected by test case');
                     done();
                 });
 
@@ -119,7 +120,7 @@ describe('Promise-Core\'s Plumbing', function () {
                 })
                 .catch(function (message) {
                     try {
-                        expect(message).to.eql('mixin invoked and this binding correct');
+                        expect(message).toEqual('mixin invoked and this binding correct');
                         done();
                     } catch (e) {
                         done(e);
@@ -133,10 +134,10 @@ describe('Promise-Core\'s Plumbing', function () {
             var context = {};
             pl.init.call(context, {});
 
-            expect(_.isFunction(context._rp_options.callback)).to.eql(true);
+            expect(_.isFunction(context._rp_options.callback)).toEqual(true);
             delete context._rp_options.callback;
 
-            expect(context._rp_options).to.eql({
+            expect(context._rp_options).toEqual({
                 simple: true,
                 resolveWithFullResponse: false,
                 transform: undefined,
@@ -154,7 +155,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             delete context._rp_options.callback;
 
-            expect(context._rp_options).to.eql({
+            expect(context._rp_options).toEqual({
                 custom: 'test',
                 simple: true,
                 resolveWithFullResponse: false,
@@ -178,7 +179,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             delete context._rp_options.callback;
 
-            expect(context._rp_options).to.eql({
+            expect(context._rp_options).toEqual({
                 simple: false,
                 resolveWithFullResponse: true,
                 transform: customTransform,
@@ -194,7 +195,7 @@ describe('Promise-Core\'s Plumbing', function () {
                 method: 'get'
             });
 
-            expect(context._rp_options.method).to.eql('GET');
+            expect(context._rp_options.method).toEqual('GET');
 
         });
 
@@ -205,7 +206,7 @@ describe('Promise-Core\'s Plumbing', function () {
                 method: 'head'
             });
 
-            expect(context._rp_options.transform).to.eql(pl.defaultTransformations.HEAD);
+            expect(context._rp_options.transform).toEqual(pl.defaultTransformations.HEAD);
 
         });
 
@@ -218,7 +219,7 @@ describe('Promise-Core\'s Plumbing', function () {
                 callback: alreadyExistingCallback
             });
 
-            expect(context._rp_callbackOrig).to.eql(alreadyExistingCallback);
+            expect(context._rp_callbackOrig).toEqual(alreadyExistingCallback);
 
         });
 
@@ -228,7 +229,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
         var pl = null;
 
-        before(function () {
+        beforeAll(function () {
 
             pl = plumbing({
                 PromiseImpl: Bluebird
@@ -249,13 +250,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.RequestError).to.eql(true);
-                    expect(err.name).to.eql('RequestError');
-                    expect(err.message).to.eql(String(passedError));
-                    expect(err.cause).to.eql(passedError);
-                    expect(err.error).to.eql(passedError);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql('dummy response');
+                    expect(err instanceof errors.RequestError).toEqual(true);
+                    expect(err.name).toEqual('RequestError');
+                    expect(err.message).toEqual(String(passedError));
+                    expect(err.cause).toEqual(passedError);
+                    expect(err.error).toEqual(passedError);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual('dummy response');
                     done();
                 });
 
@@ -276,7 +277,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (body) {
-                    expect(body).to.eql(response.body);
+                    expect(body).toEqual(response.body);
                     done();
                 })
                 .catch(function (err) {
@@ -300,7 +301,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (body) {
-                    expect(body).to.eql(response.body);
+                    expect(body).toEqual(response.body);
                     done();
                 })
                 .catch(function (err) {
@@ -326,7 +327,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (fullResponse) {
-                    expect(fullResponse).to.eql(response);
+                    expect(fullResponse).toEqual(response);
                     done();
                 })
                 .catch(function (err) {
@@ -353,13 +354,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
-                    expect(err.name).to.eql('StatusCodeError');
-                    expect(err.statusCode).to.eql(404);
-                    expect(err.message).to.eql('404 - {"a":"b"}');
-                    expect(err.error).to.eql(response.body);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(response);
+                    expect(err instanceof errors.StatusCodeError).toEqual(true);
+                    expect(err.name).toEqual('StatusCodeError');
+                    expect(err.statusCode).toEqual(404);
+                    expect(err.message).toEqual('404 - {"a":"b"}');
+                    expect(err.error).toEqual(response.body);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(response);
                     done();
                 });
 
@@ -382,7 +383,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (body) {
-                    expect(body).to.eql(response.body);
+                    expect(body).toEqual(response.body);
                     done();
                 })
                 .catch(function (err) {
@@ -410,7 +411,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(transformed).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 })
                 .catch(function (err) {
@@ -443,13 +444,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.TransformError).to.eql(true);
-                    expect(err.name).to.eql('TransformError');
-                    expect(err.message).to.eql(String(cause));
-                    expect(err.cause).to.eql(cause);
-                    expect(err.error).to.eql(cause);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(res);
+                    expect(err instanceof errors.TransformError).toEqual(true);
+                    expect(err.name).toEqual('TransformError');
+                    expect(err.message).toEqual(String(cause));
+                    expect(err.cause).toEqual(cause);
+                    expect(err.error).toEqual(cause);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(res);
                     done();
                 });
 
@@ -474,7 +475,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(transformed).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 })
                 .catch(function (err) {
@@ -507,13 +508,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.TransformError).to.eql(true);
-                    expect(err.name).to.eql('TransformError');
-                    expect(err.message).to.eql(String(cause));
-                    expect(err.cause).to.eql(cause);
-                    expect(err.error).to.eql(cause);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(res);
+                    expect(err instanceof errors.TransformError).toEqual(true);
+                    expect(err.name).toEqual('TransformError');
+                    expect(err.message).toEqual(String(cause));
+                    expect(err.cause).toEqual(cause);
+                    expect(err.error).toEqual(cause);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(res);
                     done();
                 });
 
@@ -539,7 +540,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(transformed).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 })
                 .catch(function (err) {
@@ -569,7 +570,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(transformed).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 })
                 .catch(function (err) {
@@ -600,13 +601,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
-                    expect(err.name).to.eql('StatusCodeError');
-                    expect(err.statusCode).to.eql(404);
-                    expect(err.message).to.eql('404 - {"a":"b"}');
-                    expect(err.error).to.eql(res.body);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(err instanceof errors.StatusCodeError).toEqual(true);
+                    expect(err.name).toEqual('StatusCodeError');
+                    expect(err.statusCode).toEqual(404);
+                    expect(err.message).toEqual('404 - {"a":"b"}');
+                    expect(err.error).toEqual(res.body);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 });
 
@@ -636,13 +637,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.TransformError).to.eql(true);
-                    expect(err.name).to.eql('TransformError');
-                    expect(err.message).to.eql(String(cause));
-                    expect(err.cause).to.eql(cause);
-                    expect(err.error).to.eql(cause);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(res);
+                    expect(err instanceof errors.TransformError).toEqual(true);
+                    expect(err.name).toEqual('TransformError');
+                    expect(err.message).toEqual(String(cause));
+                    expect(err.cause).toEqual(cause);
+                    expect(err.error).toEqual(cause);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(res);
                     done();
                 });
 
@@ -670,13 +671,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
-                    expect(err.name).to.eql('StatusCodeError');
-                    expect(err.statusCode).to.eql(404);
-                    expect(err.message).to.eql('404 - {"a":"b"}');
-                    expect(err.error).to.eql(res.body);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(err instanceof errors.StatusCodeError).toEqual(true);
+                    expect(err.name).toEqual('StatusCodeError');
+                    expect(err.statusCode).toEqual(404);
+                    expect(err.message).toEqual('404 - {"a":"b"}');
+                    expect(err.error).toEqual(res.body);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 });
 
@@ -706,13 +707,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.TransformError).to.eql(true);
-                    expect(err.name).to.eql('TransformError');
-                    expect(err.message).to.eql(String(cause));
-                    expect(err.cause).to.eql(cause);
-                    expect(err.error).to.eql(cause);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(res);
+                    expect(err instanceof errors.TransformError).toEqual(true);
+                    expect(err.name).toEqual('TransformError');
+                    expect(err.message).toEqual(String(cause));
+                    expect(err.cause).toEqual(cause);
+                    expect(err.error).toEqual(cause);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(res);
                     done();
                 });
 
@@ -738,7 +739,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
+                    expect(transformed).toEqual(JSON.stringify(res.body) + ' - ' + JSON.stringify(res) + ' - false');
                     done();
                 })
                 .catch(function (err) {
@@ -770,13 +771,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
-                    expect(err.name).to.eql('StatusCodeError');
-                    expect(err.statusCode).to.eql(404);
-                    expect(err.message).to.eql('404 - {"a":"b"}');
-                    expect(err.error).to.eql(res.body);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(res);
+                    expect(err instanceof errors.StatusCodeError).toEqual(true);
+                    expect(err.name).toEqual('StatusCodeError');
+                    expect(err.statusCode).toEqual(404);
+                    expect(err.message).toEqual('404 - {"a":"b"}');
+                    expect(err.error).toEqual(res.body);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(res);
                     done();
                 });
 
@@ -803,7 +804,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (body) {
-                    expect(body).to.eql(res.body);
+                    expect(body).toEqual(res.body);
                     done();
                 })
                 .catch(function (err) {
@@ -829,7 +830,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(res.headers);
+                    expect(transformed).toEqual(res.headers);
                     done();
                 })
                 .catch(function (err) {
@@ -856,7 +857,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql(res);
+                    expect(transformed).toEqual(res);
                     done();
                 })
                 .catch(function (err) {
@@ -885,7 +886,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (transformed) {
-                    expect(transformed).to.eql('custom');
+                    expect(transformed).toEqual('custom');
                     done();
                 })
                 .catch(function (err) {
@@ -915,7 +916,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             context._rp_promise
                 .then(function (response) {
-                    expect(response.headers).to.eql(res.headers);
+                    expect(response.headers).toEqual(res.headers);
                     done();
                 })
                 .catch(function (err) {
@@ -948,13 +949,13 @@ describe('Promise-Core\'s Plumbing', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
-                    expect(err.name).to.eql('StatusCodeError');
-                    expect(err.statusCode).to.eql(404);
-                    expect(err.message).to.eql('404 - undefined');
-                    expect(err.error).to.eql(res.body);
-                    expect(err.options).to.eql(context._rp_options);
-                    expect(err.response).to.eql(res);
+                    expect(err instanceof errors.StatusCodeError).toEqual(true);
+                    expect(err.name).toEqual('StatusCodeError');
+                    expect(err.statusCode).toEqual(404);
+                    expect(err.message).toEqual('404 - undefined');
+                    expect(err.error).toEqual(res.body);
+                    expect(err.options).toEqual(context._rp_options);
+                    expect(err.response).toEqual(res);
                     done();
                 });
 
@@ -986,10 +987,10 @@ describe('Promise-Core\'s Plumbing', function () {
             context._rp_promise
                 .then(function (body) {
 
-                    expect(body).to.eql(res.body);
+                    expect(body).toEqual(res.body);
 
-                    expect(callbackWasCalled).to.eql(1);
-                    expect(callbackArgs).to.eql({
+                    expect(callbackWasCalled).toEqual(1);
+                    expect(callbackArgs).toEqual({
                         err: null,
                         response: res,
                         body: res.body
@@ -1024,11 +1025,11 @@ describe('Promise-Core\'s Plumbing', function () {
 
             expect(function () {
                 pl.callback.call(context, null, res, res.body);
-            }).to.throw('thrown by callback');
+            }).toThrow('thrown by callback');
 
             context._rp_promise
                 .then(function (body) {
-                    expect(body).to.eql(res.body);
+                    expect(body).toEqual(res.body);
                     done();
                 })
                 .catch(function (err) {
@@ -1056,7 +1057,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromiseMethod(target, null, 'fakePromise', 'then');
 
-            expect(target.then()).to.eql(5);
+            expect(target.then()).toEqual(5);
 
         });
 
@@ -1074,7 +1075,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromiseMethod(target, source, 'fakePromise', 'then');
 
-            expect(target.then()).to.eql(5);
+            expect(target.then()).toEqual(5);
 
         });
 
@@ -1091,7 +1092,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromiseMethod(target, null, 'fakePromise', 'then', 'next');
 
-            expect(target.next()).to.eql(5);
+            expect(target.next()).toEqual(5);
 
         });
 
@@ -1108,7 +1109,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             expect(function () {
                 exposePromiseMethod(target, null, 'fakePromise', 'then', 'fakePromise');
-            }).to.throw('Unable to expose method "fakePromise"');
+            }).toThrow('Unable to expose method "fakePromise"');
 
         });
 
@@ -1125,7 +1126,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromiseMethod(target, null, 'fakePromise', 'then');
 
-            expect(target.then(7, 11)).to.eql(5+7+11);
+            expect(target.then(7, 11)).toEqual(5+7+11);
 
         });
 
@@ -1148,7 +1149,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromise(target, null, 'fakePromise');
 
-            expect(target.promise().then()).to.eql(5);
+            expect(target.promise().then()).toEqual(5);
 
         });
 
@@ -1166,7 +1167,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromise(target, source, 'fakePromise');
 
-            expect(target.promise().then()).to.eql(5);
+            expect(target.promise().then()).toEqual(5);
 
         });
 
@@ -1183,7 +1184,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             exposePromise(target, null, 'fakePromise', 'promise2');
 
-            expect(target.promise2().then()).to.eql(5);
+            expect(target.promise2().then()).toEqual(5);
 
         });
 
@@ -1200,7 +1201,7 @@ describe('Promise-Core\'s Plumbing', function () {
 
             expect(function () {
                 exposePromise(target, null, 'fakePromise', 'fakePromise');
-            }).to.throw('Unable to expose method "fakePromise"');
+            }).toThrow('Unable to expose method "fakePromise"');
 
         });
 

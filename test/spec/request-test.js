@@ -5,8 +5,7 @@ var childProcess = require('child_process'),
     tough = require('tough-cookie'),
     startServer = require('../fixtures/server.js');
 
-const { afterAll, beforeAll, describe, expect } = require('@jest/globals');
-
+const { afterAll, beforeAll, describe, expect, it } = require('@jest/globals');
 
 describe('Request-Promise-Native', function () {
 
