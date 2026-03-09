@@ -1,10 +1,10 @@
-var Bluebird = require('bluebird'),
+const Bluebird = require('bluebird'),
     configure = require('../../configure/request2.js'),
     errors = require('../../errors'),
     stealthyRequire = require('stealthy-require'),
-    startServer = require('../fixtures/server.js'),
-    expect = require('chai').expect;
+    startServer = require('../fixtures/server.js');
 
+const { afterAll, beforeAll, describe, expect, it } = require('@jest/globals');
 
 describe('Promise-Core for Request@2', function () {
 
@@ -18,48 +18,48 @@ describe('Promise-Core for Request@2', function () {
 
             expect(function () {
                 configure();
-            }).to.throw('Please verify options');
+            }).toThrow('Please verify options');
 
             expect(function () {
                 configure('not an object');
-            }).to.throw('Please verify options');
+            }).toThrow('Please verify options');
 
             expect(function () {
                 configure({});
-            }).to.throw('Please verify options.request');
+            }).toThrow('Please verify options.request');
 
             expect(function () {
                 configure({
                     request: 'not a function'
                 });
-            }).to.throw('Please verify options.request');
+            }).toThrow('Please verify options.request');
 
             expect(function () {
                 configure({
                     request: request
                 });
-            }).to.throw('Please verify options.expose');
+            }).toThrow('Please verify options.expose');
 
             expect(function () {
                 configure({
                     request: request,
                     expose: 'not an array'
                 });
-            }).to.throw('Please verify options.expose');
+            }).toThrow('Please verify options.expose');
 
             expect(function () {
                 configure({
                     request: request,
                     expose: []
                 });
-            }).to.throw('Please verify options.expose');
+            }).toThrow('Please verify options.expose');
 
             expect(function () {
                 configure({
                     request: request,
                     expose: ['then', 'promise']
                 });
-            }).to.throw('Please verify options.PromiseImpl');
+            }).toThrow('Please verify options.PromiseImpl');
 
             expect(function () {
                 configure({
@@ -67,7 +67,7 @@ describe('Promise-Core for Request@2', function () {
                     expose: ['then', 'promise'],
                     PromiseImpl: 'not a function'
                 });
-            }).to.throw('Please verify options.PromiseImpl');
+            }).toThrow('Please verify options.PromiseImpl');
 
             expect(function () {
                 configure({
@@ -75,7 +75,7 @@ describe('Promise-Core for Request@2', function () {
                     expose: ['then', 'promise'],
                     PromiseImpl: Bluebird
                 });
-            }).not.to.throw();
+            }).not.toThrow();
 
             request = stealthyRequire(require.cache, function () {
                 return require('request');
@@ -87,7 +87,7 @@ describe('Promise-Core for Request@2', function () {
                     expose: ['promise'],
                     PromiseImpl: Bluebird
                 });
-            }).to.throw('Please expose "then"');
+            }).toThrow('Unable to expose method "promise"');
 
         });
 
@@ -95,9 +95,11 @@ describe('Promise-Core for Request@2', function () {
 
             var mixinCalled = false;
 
-            var request = stealthyRequire(require.cache, function () {
-                return require('request');
-            });
+            // var request = stealthyRequire(require.cache, function () {
+            //     return require('request');
+            // });
+
+            const request = require('request');
 
             configure({
                 request: request,
@@ -110,7 +112,7 @@ describe('Promise-Core for Request@2', function () {
 
             return request('http://localhost:4000') // not started yet so expecting ECONNREFUSED
                 .catch(function () {
-                    expect(mixinCalled).to.eql(true);
+                    expect(mixinCalled).toEqual(true);
                 });
 
         });
@@ -131,7 +133,7 @@ describe('Promise-Core for Request@2', function () {
 
         var request = null, stopServer = null;
 
-        before(function (done) {
+        beforeAll(function (done) {
 
             request = stealthyRequire(require.cache, function () {
                 return require('request');
@@ -155,9 +157,9 @@ describe('Promise-Core for Request@2', function () {
 
         });
 
-        after(function (done) {
+        afterAll(function (done) {
 
-            stopServer(done);
+            stopServer && stopServer(done);
 
         });
 
@@ -165,7 +167,7 @@ describe('Promise-Core for Request@2', function () {
 
             request('http://localhost:4000/200')
                 .then(function (body) {
-                    expect(body).to.eql('GET /200');
+                    expect(body).toEqual('GET /200');
                     done();
                 })
                 .catch(function (err) {
@@ -186,7 +188,7 @@ describe('Promise-Core for Request@2', function () {
                 transform2xxOnly: true
             })
                 .then(function (response) {
-                    expect(response.body).to.eql('GET /404');
+                    expect(response.body).toEqual('GET /404');
                     done();
                 })
                 .catch(function (err) {
@@ -206,7 +208,7 @@ describe('Promise-Core for Request@2', function () {
                 json: true
             })
                 .then(function (body) {
-                    expect(body).to.eql('POST /200 - {"a":"b"}');
+                    expect(body).toEqual('POST /200 - {"a":"b"}');
                     done();
                 })
                 .catch(function (err) {
@@ -229,7 +231,7 @@ describe('Promise-Core for Request@2', function () {
                 }
             })
                 .then(function (body) {
-                    expect(body).to.eql('POST /200 - {"a":"b"}'.split('').reverse().join(''));
+                    expect(body).toEqual('POST /200 - {"a":"b"}'.split('').reverse().join(''));
                     done();
                 })
                 .catch(function (err) {
@@ -242,7 +244,7 @@ describe('Promise-Core for Request@2', function () {
 
             request('http://localhost:4000/301')
                 .then(function (body) {
-                    expect(body).to.eql('GET /200');
+                    expect(body).toEqual('GET /200');
                     done();
                 })
                 .catch(function (err) {
@@ -258,7 +260,7 @@ describe('Promise-Core for Request@2', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.RequestError).to.eql(true);
+                    expect(err instanceof errors.RequestError).toEqual(true);
                     done();
                 });
 
@@ -271,7 +273,7 @@ describe('Promise-Core for Request@2', function () {
                     done(new Error('Expected promise to be rejected.'));
                 })
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
+                    expect(err instanceof errors.StatusCodeError).toEqual(true);
                     done();
                 });
 
@@ -285,8 +287,8 @@ describe('Promise-Core for Request@2', function () {
                 callbackWasCalled = true;
             })
                 .then(function (body) {
-                    expect(body).to.eql('GET /200');
-                    expect(callbackWasCalled).to.eql(true);
+                    expect(body).toEqual('GET /200');
+                    expect(callbackWasCalled).toEqual(true);
                     done();
                 })
                 .catch(function (err) {
@@ -301,7 +303,7 @@ describe('Promise-Core for Request@2', function () {
 
         var request = null, stopServer = null;
 
-        before(function (done) {
+        beforeAll(function (done) {
 
             request = stealthyRequire(require.cache, function () {
                 return require('request');
@@ -325,10 +327,8 @@ describe('Promise-Core for Request@2', function () {
 
         });
 
-        after(function (done) {
-
-            stopServer(done);
-
+        afterAll(function (done) {
+            ( stopServer && stopServer(done) ) || done();
         });
 
         it('method shortcuts', function (done) {
@@ -342,7 +342,7 @@ describe('Promise-Core for Request@2', function () {
                 simple: false // <-- ensures that parameter is forwarded
             })
                 .then(function (body) {
-                    expect(body).to.eql('POST /404 - {"a":"b"}');
+                    expect(body).toEqual('POST /404 - {"a":"b"}');
                     done();
                 })
                 .catch(function (err) {
@@ -360,7 +360,7 @@ describe('Promise-Core for Request@2', function () {
                 resolveWithFullResponse: true
             })
                 .then(function (response) {
-                    expect(response.body).to.eql('GET /404');
+                    expect(response.body).toEqual('GET /404');
                     done();
                 })
                 .catch(function (err) {
@@ -376,7 +376,7 @@ describe('Promise-Core for Request@2', function () {
 
             rpSimpleOffWithFullResp('http://localhost:4000/404')
                 .then(function (response) {
-                    expect(response.body).to.eql('GET /404');
+                    expect(response.body).toEqual('GET /404');
                     done();
                 })
                 .catch(function (err) {
@@ -390,8 +390,8 @@ describe('Promise-Core for Request@2', function () {
 
             request('http://localhost:4000/200')
                 .on('complete', function (httpResponse, body) {
-                    expect(httpResponse.statusCode).to.eql(200);
-                    expect(body).to.eql('GET /200');
+                    expect(httpResponse.statusCode).toEqual(200);
+                    expect(body).toEqual('GET /200');
                     done();
                 });
 
@@ -401,7 +401,7 @@ describe('Promise-Core for Request@2', function () {
 
             request('http://localhost:4000/200', { method: 'POST', json: { foo: 'bar' } })
                 .then(function (body) {
-                    expect(body).to.eql('POST /200 - {"foo":"bar"}');
+                    expect(body).toEqual('POST /200 - {"foo":"bar"}');
                     done();
                 })
                 .catch(function (err) {
