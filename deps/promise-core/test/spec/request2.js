@@ -10,7 +10,7 @@ describe('Promise-Core for Request@2', function () {
     describe('during configuration', function () {
 
         afterEach(function () {
-            jest.resetModules();
+            jest.resetModules(); // eslint-disable-line no-undef
         });
 
         it('should verify the options', function () {
@@ -136,7 +136,7 @@ describe('Promise-Core for Request@2', function () {
 
         beforeAll(function (done) {
 
-            jest.resetModules();
+            jest.resetModules(); // eslint-disable-line no-undef
 
             request = stealthyRequire(require.cache, function () {
                 return require('request');
@@ -311,7 +311,7 @@ describe('Promise-Core for Request@2', function () {
 
         beforeAll(function (done) {
 
-            jest.resetModules();
+            jest.resetModules(); // eslint-disable-line no-undef
 
             request = stealthyRequire(require.cache, function () {
                 return require('request');
