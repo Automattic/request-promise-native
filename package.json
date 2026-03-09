@@ -40,6 +40,7 @@
     "stealthy-require": "^1.1.1"
   },
   "devDependencies": {
+    "@jest/globals": "^30.2.0",
     "@types/caseless": "^0.12.5",
     "@types/node": "^25.0.2",
     "bluebird": "^3.7.2",
