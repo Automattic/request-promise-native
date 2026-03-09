@@ -3,36 +3,32 @@ var childProcess = require('child_process'),
     path = require('path'),
     rp = require('../../'),
     tough = require('tough-cookie'),
-    startServer = require('../fixtures/server.js'),
-    expect = require('chai').expect;
+    startServer = require('../fixtures/server.js');
 
+const { afterAll, beforeAll, describe, expect, it } = require('@jest/globals');
 
 describe('Request-Promise-Native', function () {
 
     var stopServer = null;
 
-    before(function (done) {
-
-        startServer(4000, function (stop) {
+    beforeAll(function (done) {
+        startServer(4001, function (stop) {
             stopServer = stop;
             done();
         });
-
     });
 
-    after(function (done) {
-
+    afterAll(function (done) {
         stopServer(done);
-
     });
 
     describe('should expose', function () {
 
         it('.then(...)', function (done) {
 
-            rp('http://localhost:4000/200')
+            rp('http://localhost:4001/200')
                 .then(function (body) {
-                    expect(body).to.eql('GET /200');
+                    expect(body).toEqual('GET /200');
                     done();
                 })
                 .catch(function (err) {
@@ -43,13 +39,13 @@ describe('Request-Promise-Native', function () {
 
         it('.catch(...) and the error types', function (done) {
 
-            rp('http://localhost:4000/404')
+            rp('http://localhost:4001/404')
                 .catch(function (err) {
-                    expect(err instanceof errors.StatusCodeError).to.eql(true);
+                    expect(err).toBeInstanceOf(errors.StatusCodeError);
                     return 'catch called';
                 })
                 .then(function (info) {
-                    expect(info).to.eql('catch called');
+                    expect(info).toEqual('catch called');
                     done();
                 })
                 .catch(function (err) {
@@ -60,10 +56,9 @@ describe('Request-Promise-Native', function () {
 
         it('.promise() returning a native ES6 promise', function () {
 
-            var p = rp('http://localhost:4000/200').promise();
+            var p = rp('http://localhost:4001/200').promise();
 
-            expect(p instanceof Promise).to.eql(true);
-
+            expect(p).toBeInstanceOf(Promise);
         });
 
     });
@@ -80,7 +75,7 @@ describe('Request-Promise-Native', function () {
                 }
 
                 try {
-                    expect(stdout, 'Actual stdout: ' + stdout).to.contain('rp: true, request: true');
+                    expect(stdout).toContain('rp: true, request: true');
                     done();
                 } catch (e) {
                     done(e);
@@ -100,7 +95,7 @@ describe('Request-Promise-Native', function () {
                 }
 
                 try {
-                    expect(stdout, 'Actual stdout: ' + stdout).to.contain('request: true, rp: true');
+                    expect(stdout).toContain('request: true, rp: true');
                     done();
                 } catch (e) {
                     done(e);
@@ -120,7 +115,7 @@ describe('Request-Promise-Native', function () {
                 }
 
                 try {
-                    expect(stdout, 'Actual stdout: ' + stdout).to.contain('request1: true, rp: true, request2: true');
+                    expect(stdout).toContain('request1: true, rp: true, request2: true');
                     done();
                 } catch (e) {
                     done(e);
@@ -144,9 +139,9 @@ describe('Request-Promise-Native', function () {
 
         var cookiejar = rp.jar();
 
-        expect(function () {
+        expect(() => {
             cookiejar.setCookie(sessionCookie.toString(), 'https://api.mydomain.com');
-        }).to.not.throw();
+        }).not.toThrow();
 
     });
 
