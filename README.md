@@ -1,11 +1,10 @@
 Request-Promise-Native
 ======================
 
-[![Test with mocha](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml/badge.svg)](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml)
+[![Test with jest](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml/badge.svg)](https://github.com/Automattic/request-promise-native/actions/workflows/test.yml)
 
-# Important note
-
-As of Feb 11th 2020, [`request`](https://github.com/request/request) is fully deprecated. Hence, we're using [the forked version of it - `@cypress/request`](https://github.com/cypress-io/request).
+> [!NOTE]
+> As of Feb 11th 2020, [`request`](https://github.com/request/request) is fully deprecated. Hence, we're using [the forked version of it - `@cypress/request`](https://github.com/cypress-io/request).
 
 ---
 
