@@ -19,7 +19,7 @@
     "lint:fix": "eslint --fix .",
     "test": "jest",
     "check-dependencies": "npx depcheck@1.4.7",
-    "check-dts": "npx check-dts lib/*.d.ts"
+    "check-dts": "npx check-dts@1.0.0 lib/*.d.ts"
   },
   "repository": {
     "type": "git",
