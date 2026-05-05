@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.19",
-    "request": "npm:@cypress/request@^3.0.10",
+    "request": "npm:@cypress/request@^4.0.0",
     "stealthy-require": "^1.1.1"
   },
   "devDependencies": {
