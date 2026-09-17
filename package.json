@@ -50,9 +50,6 @@
     "jest": "^30.2.0",
     "tough-cookie": "^6.0.0"
   },
-  "overrides": {
-    "qs": "6.15.2"
-  },
   "jest": {
     "injectGlobals": false,
     "testMatch": [
