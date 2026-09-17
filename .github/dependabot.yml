@@ -4,4 +4,16 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    # only consider updates that have been released at least 7 days ago
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 15
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    # only consider updates that have been released at least 7 days ago
+    cooldown:
+      default-days: 7
     open-pull-requests-limit: 15
