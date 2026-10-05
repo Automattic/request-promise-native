@@ -23,6 +23,25 @@ npm i --save "request-promise-native@npm:@automattic/request-promise-native@late
 ```
 
 
+## TypeScript
+
+The `request` API is typed via `lib/request.d.ts` and the error classes thrown by rejected requests are typed via `errors.d.ts`:
+
+```ts
+import { StatusCodeError } from 'request-promise-native/errors';
+
+try {
+    await request('http://example.com/');
+} catch (err) {
+    if (err instanceof StatusCodeError) {
+        console.error(err.statusCode, err.error, err.response.headers);
+    }
+}
+```
+
+`RequestError` (request failed, e.g. a network error) and `TransformError` (the `transform` function threw) are typed as well.
+
+
 ## Migration from `request-promise` to `request-promise-native`
 
 1. Go through the [migration instructions](https://github.com/request/request-promise#migration-from-v3-to-v4) to upgrade to `request-promise` v4.
